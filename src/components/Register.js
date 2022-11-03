@@ -31,9 +31,9 @@ class Register extends Component {
                     })
                     .then(() => this.props.navigation.navigate()) //una vez que se registra, que me redirija a una pagina
 
-                    .catch(error => console.log(error))
+                    .catch(error => alert(error))
 
-            })
+            }) .catch(error => alert(error))
     }
 
     render() {
