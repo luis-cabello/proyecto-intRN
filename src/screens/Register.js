@@ -29,7 +29,7 @@ class Register extends Component {
                     .then(() => {
                         email: 'email'
                     })
-                    .then(() => this.props.navigation.navigate()) //una vez que se registra, que me redirija a una pagina
+                    .then(() => this.props.navigation.navigate('Login')) //una vez que se registra, que me redirija a una pagina
 
                     .catch(error => alert(error))
 
@@ -70,9 +70,9 @@ class Register extends Component {
                         placeholder="Photo"
                         keyboardType="?"
                         onChangeText={text => { this.setState({ photo: text }) }} //setemoas el estado y la info que ponga el usuario se guardara alli
-                        value={this.state.fotoPerfil} />
+                        value={this.state.fotoPerfil} /> 
 
-                    <TouchableOpacity onPress={() => this.registerUser(this.state.email, this.state.password)}>
+                    <TouchableOpacity onPress={() => this.registerUser(this.state.email, this.state.password, this.state.userName, this.state.bio)}>
                         <Text>Registrame</Text>
                        
                     </TouchableOpacity>
