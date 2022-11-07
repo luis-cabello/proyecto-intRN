@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { auth, db } from '../firebase/config'
+import MyCamera from '../components/Mycamera'
 
 class NewPost extends Component {
     constructor() {
@@ -8,7 +9,8 @@ class NewPost extends Component {
         this.state = {
             textoPosteo: '',
             createdAt: '',
-            photo: ''
+            photo: '', 
+            showCamera: true
         }
     }
 
@@ -27,15 +29,31 @@ class NewPost extends Component {
             .then(() => {
                 this.setState({
                     texto: '',
+                    showCamera: true,
                 })
                 this.props.navigation.navigate('Home')
             })
             .catch(error => console.log(error))
     }
+
+    onImageUpload(url){
+        this.setState({
+            photo: url,
+            showCamera: false,
+        })
+    }
+    
     render() {
         return (
+
+            <View> 
+            {
+                this.state.showCamera ?
+                <MyCamera onImageUpload={url => this.onImageUpload(url)}/>
+                :
             <View>
                 <Text> New Post </Text>
+
                 <View>
                     <TextInput
                         placeholder='Texto Posteo'
@@ -47,10 +65,11 @@ class NewPost extends Component {
                     <TouchableOpacity onPress={() => this.createPost(this.state.textoPosteo, this.state.photo)}>
                         <Text> Guardar</Text>
                     </TouchableOpacity>
-
-
-                </View>
+                </View> 
             </View>
+            }
+            </View>
+
         )
     }
 
