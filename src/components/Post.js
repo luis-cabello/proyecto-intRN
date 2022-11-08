@@ -59,7 +59,8 @@ class Post extends Component {
                     resizeMode='cover'
                 />
                 <Text> {this.props.postData.data.textoPost} </Text>
-                <Text> Cantidad de Likes: {this.state.cantidadDeLikes} </Text>
+                <Text>{this.props.postData.data.owner}</Text>
+                <Text>Cantidad de Likes: {this.state.cantidadDeLikes} </Text>
                 { this.state.miLike ? 
                     <TouchableOpacity onPress={ ()=> this.unlike() }>
                         <Text>Dislike</Text>
