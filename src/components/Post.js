@@ -60,6 +60,7 @@ class Post extends Component {
                 />
                 <Text> {this.props.postData.data.textoPost} </Text>
                 <Text>{this.props.postData.data.owner}</Text>
+                <Text>{this.props.postData.data.textoPosteo}</Text>
                 <Text>Cantidad de Likes: {this.state.cantidadDeLikes} </Text>
                 { this.state.miLike ? 
                     <TouchableOpacity onPress={ ()=> this.unlike() }>

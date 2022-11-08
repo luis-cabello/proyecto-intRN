@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {auth, db} from '../firebase/config';
-import {Text, View, FlatList} from 'react-native'
+import {Text, View, FlatList, ScrollView} from 'react-native'
 import Post from '../components/Post';
 
 
@@ -35,15 +35,15 @@ class Home extends Component{
     render(){
         console.log(this.state.posts);
         return(
-            <View>
+            <ScrollView>
                 <Text>Posts</Text>
-                
+
                 <FlatList 
                         data={this.state.posts}
                         keyExtractor={ onePost => onePost.id.toString()}
                         renderItem={ ({item}) => <Post postData={item} />}
                     />               
-            </View>
+            </ScrollView>
 
         )
     }
