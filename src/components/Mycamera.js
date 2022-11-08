@@ -60,7 +60,7 @@ class MyCamera extends Component{
                             ref={metodosDeCamara => this.metodosDeCamara = metodosDeCamara }
                         />
                         <TouchableOpacity style={styles.button} onPress={()=>this.sacarFoto()}>
-                            <Text>Sacar foto</Text>
+                            <Text>Take Photo</Text>
                         </TouchableOpacity>
                     </View>
                     :
@@ -71,15 +71,15 @@ class MyCamera extends Component{
                             resizeMode='cover'
                         />
                         <TouchableOpacity style={styles.button} onPress={()=>this.cancelar()}>
-                            <Text>Cancelar</Text>
+                            <Text>Cancel</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button} onPress={()=>this.guardarFoto()}>
-                            <Text>Aceptar</Text>
+                            <Text>Accept</Text>
                         </TouchableOpacity>
                     </View>
 
                 :
-                    <Text>No tengo permisos</Text>
+                    <Text>No permits</Text>
             }
             </View>
         )

@@ -39,7 +39,7 @@ class Register extends Component {
     render() {
         return (
             <View>
-                <Text>Registrate</Text>
+                <Text>Register</Text>
                 <View>
                     <TextInput
                         placeholder="Email"
@@ -73,7 +73,7 @@ class Register extends Component {
                         value={this.state.fotoPerfil} /> 
 
                     <TouchableOpacity onPress={() => this.registerUser(this.state.email, this.state.password, this.state.userName, this.state.bio)}>
-                        <Text>Registrame</Text>
+                        <Text>Register</Text>
                        
                     </TouchableOpacity>
 

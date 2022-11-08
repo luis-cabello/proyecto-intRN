@@ -63,8 +63,8 @@ class NewPost extends Component {
                     />
 
                     <TouchableOpacity onPress={() => this.createPost(this.state.textoPosteo, this.state.photo)}>
-                        <Text> Guardar</Text>
-                    </TouchableOpacity>
+                        <Text> Done </Text>
+                    </TouchableOpacity> 
                 </View> 
             </View>
             }
