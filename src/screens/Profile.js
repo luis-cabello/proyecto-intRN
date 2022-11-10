@@ -7,38 +7,44 @@ class Profile extends Component {
         super()
         this.state = {
             email : auth.currentUser.email,
+            users: ''
             
         }
 
     }
 
     componentDidMount(){
-        db.collection('users').onSnapshot(
+        db.collection('users').where( 'email', "==" , auth.currentUser.email).onSnapshot(
             docs => {
                 let users = [];
                 docs.forEach(doc => {
+                    console.log(doc);
                     users.push({
                         id : doc.id,
-                        data : doc.data()
+                        data: doc.data(),
+                        userName : doc.data().userName,
+                        bio : doc.data().bio,
+                        foto : doc.data().fotoPerfil
                     })
                     this.setState({
-                        users : users
+                        users : users[0]
                     })
                 })
             }
-        )
-    }
-    render(){
+            )
+        }
+        render(){
+        console.log(this.state.users.data);
+        console.log(this.state.email);
         return(
             <ScrollView>
             <Text>Usuario</Text>
+            <Text> {this.state.email}</Text>
+            <Text> {this.state.users.userName} </Text>
+            <Text> {this.state.users.bio} </Text>
+            
 
-            <FlatList 
-                    data={this.state.email}
-                     
-                    renderItem={ ({email}) => <Text> {this.state.email}</Text>}
-                  
-                />               
+                    
         </ScrollView>
         )
     }
