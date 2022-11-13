@@ -47,6 +47,15 @@ class MyCamera extends Component{
         .catch(e => console.log(e))
     }
 
+    cancelar(){
+
+        this.setState({
+            urlTemporal: '',
+            showCamera:true 
+        })
+   
+}
+
     render(){
         return(
             <View>

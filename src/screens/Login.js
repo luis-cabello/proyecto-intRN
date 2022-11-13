@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity } from 'react-native'
 import { auth } from '../firebase/config'
+import { Switch } from 'react-native'
 
 class Login extends Component {
     constructor() {
@@ -9,7 +10,8 @@ class Login extends Component {
             email: '',
             password: '',
             userName: '',
-            errors: ''
+            errors: '',
+            rememberMe: ''
         }
     }
 
@@ -18,7 +20,16 @@ class Login extends Component {
             .then(res => {
                 this.props.navigation.navigate('HomeMenu')
             })
-            .catch(error => console.log(error))
+            .catch(error => alert(error))
+    }
+    
+    componentDidMount(){
+        auth.onAuthStateChanged(user => {
+            if(user){
+                this.props.navigation.navigate('HomeMenu')
+            } 
+           
+        })
     }
 
     render() {
@@ -42,7 +53,7 @@ class Login extends Component {
 
                         <TouchableOpacity onPress = {() => this.loginUser(this.state.email, this.state.password)}>
                             <Text>Log in</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity>                     
                         <Text onPress = {() => this.props.navigation.navigate('Register')}> Go to Register</Text>
 
                     

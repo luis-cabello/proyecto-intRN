@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Image } from 'react-native';
-
+import { Text, View, TouchableOpacity, StyleSheet, Image, FlatList } from 'react-native';
 import {auth, db} from '../firebase/config';
 import firebase from 'firebase';
 
@@ -14,7 +13,7 @@ class Post extends Component {
     }
 
     componentDidMount(){
-        if(this.props.postData.data.likes.includes('pedromainardi45@gmail.com')){ 
+        if(this.props.postData.data.likes.includes(auth.currentUser.email)){ 
             this.setState({
                 miLike:true
             })
@@ -25,7 +24,7 @@ class Post extends Component {
         db.collection('posts')
             .doc(this.props.postData.id) 
             .update({
-                likes: firebase.firestore.FieldValue.arrayUnion('pedromainardi45@gmail.com')
+                likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
             })
             .then(()=> this.setState({
                 cantidadDeLikes: this.state.cantidadDeLikes +1,
@@ -39,7 +38,7 @@ class Post extends Component {
         db.collection('posts')
         .doc(this.props.postData.id) 
         .update({
-            likes: firebase.firestore.FieldValue.arrayUnion('pedromainardi45@gmail.com')
+            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
         .then(()=> this.setState({
             cantidadDeLikes: this.state.cantidadDeLikes -1,
@@ -58,10 +57,10 @@ class Post extends Component {
                     source={{uri: this.props.postData.data.photo}}
                     resizeMode='cover'
                 />
-                <Text> {this.props.postData.data.textoPost} </Text>
-                <Text>{this.props.postData.data.owner}</Text>
-                <Text>{this.props.postData.data.textoPosteo}</Text>
-                <Text>Cantidad de Likes: {this.state.cantidadDeLikes} </Text>
+                <TouchableOpacity onPress={()=> this.props.navigation.navigate('Profile',{email:this.props.postData.data.owner})}>
+                    <Text>Subido por {this.props.postData.data.owner}</Text>
+                    </TouchableOpacity>
+
                 { this.state.miLike ? 
                     <TouchableOpacity onPress={ ()=> this.unlike() }>
                         <Text>Dislike</Text>
@@ -71,6 +70,10 @@ class Post extends Component {
                         <Text>Like</Text>
                     </TouchableOpacity>
                 }
+
+                <Text>{this.state.cantidadDeLikes} likes </Text>
+                <Text>{this.props.postData.data.textoPosteo}</Text>
+                
             </View>
         )
     }
