@@ -30,22 +30,11 @@ class Home extends Component{
         )
     }
 
-    buscarPeli(movie,textSearch){
-        if (movie) {
-            fetch(`https://api.themoviedb.org/3/search/movie?api_key=7a176cc95147be6e695be2faf0e8ff9c&language=en-US&query=${textSearch}&page=1&include_adult=false`)
-            .then(res => res.json())
-            .then(data => this.setState({
-                resultadosBusqueda : data.results 
-            }))
-            .catch(err => console.log(err))
-        }
-    }
-
     render(){
         console.log(this.state.posts);
         return(
             <ScrollView>
-                <Buscador buscar = {(movie,textSearch)=> this.buscarPeli(movie,textSearch) }/>
+               
                 <Text>Posts</Text>
 
                 <FlatList 
