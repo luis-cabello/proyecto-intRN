@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {auth, db} from '../firebase/config';
 import {Text, View, FlatList, ScrollView} from 'react-native'
 import Post from '../components/Post';
+import Buscador from '../components/Buscador';
 
 
 class Home extends Component{
