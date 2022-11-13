@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, TouchableOpacity} from 'react-native'
 import { auth, db } from '../firebase/config'
+import MyCamera from '../components/MyCamera';
 
 class Register extends Component {
     constructor() {
@@ -10,7 +11,9 @@ class Register extends Component {
             password: '',
             userName: '',
             bio: '',
-            fotoPerfil: ''
+            fotoPerfil: '',
+            showCamera: false,
+            disabled: true
         }
     }
     registerUser(email, password, userName, bio, fotoPerfil) {
@@ -22,7 +25,7 @@ class Register extends Component {
                     userName: userName,
                     password: password,
                     bio: bio,
-                    fotoPerfil: '',
+                    fotoPerfil: fotoPerfil,
                     createdAt: Date.now()
                 })
 
@@ -30,21 +33,31 @@ class Register extends Component {
                         email: 'email'
                     })
                     .then(() => this.props.navigation.navigate('Login')) //una vez que se registra, que me redirija a una pagina
+                    
 
                     .catch(error => alert(error))
 
             }) .catch(error => alert(error))
     }
 
+    onImageUpload(url){
+        this.setState({
+            fotoPerfil: url,
+            showCamera: false,
+        })
+        
+    }
+
     render() {
+        console.log(this.state.disabled);
         return (
             <View>
                 <Text>Register</Text>
-                <View>
+                <View >
                     <TextInput
                         placeholder="Email"
                         keyboardType="Email-Adress"
-                        onChangeText={text => { this.setState({ email: text }) }} //setemoas el estado y la info que ponga el usuario se guardara alli
+                        onChangeText={text => { this.setState({ email: text, disabled: false}) }} //setemoas el estado y la info que ponga el usuario se guardara alli
                         value={this.state.email} />
 
                     <TextInput
@@ -66,24 +79,26 @@ class Register extends Component {
                         onChangeText={text => { this.setState({ bio: text }) }} //setemoas el estado y la info que ponga el usuario se guardara alli
                         value={this.state.bio} />
 
-                    <TextInput
-                        placeholder="Photo"
-                        keyboardType="?"
-                        onChangeText={text => { this.setState({ photo: text }) }} //setemoas el estado y la info que ponga el usuario se guardara alli
-                        value={this.state.fotoPerfil} /> 
+                    {
+                        this.state.showCamera ?
+                        <View style={{width: '100vw', heigth: '100vh'}}>
+                            <MyCamera onImageUpload={url => this.onImageUpload(url)}/> 
+                        </View> 
+                        :
+                        <TouchableOpacity onPress={()=> this.setState({showCamera:true})}>
+                            <Text>Subir foto de perfil</Text>
+                        </TouchableOpacity>
+                    }
 
-                    <TouchableOpacity onPress={() => this.registerUser(this.state.email, this.state.password, this.state.userName, this.state.bio)}>
+                    <TouchableOpacity disabled={this.state.disabled} onPress={() => this.registerUser(this.state.email, this.state.password, this.state.userName, this.state.bio, this.state.fotoPerfil )}>
                         <Text>Register</Text>
-                       
                     </TouchableOpacity>
 
                 </View>
             </View>
         )
     }
-
-
-
+    
 
 
 }
