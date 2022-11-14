@@ -73,7 +73,7 @@ class Profile extends Component {
             <FlatList 
                 data={this.state.posts}
                 keyExtractor={ onePost => onePost.id.toString()}
-                renderItem={ ({item}) => <Post postData={item} navigation={this.props.navigation} />}
+                renderItem={ ({item}) => <Post postDarta={item} navigation={this.props.navigation} />}
             />       
                     
         </ScrollView>
@@ -82,8 +82,6 @@ class Profile extends Component {
 }
 
 const styles= StyleSheet.create ({
-
-
 
     scroll:{
         flex: 2
