@@ -49,7 +49,7 @@ class Post extends Component {
     }
 
     render(){
-        console.log(this.props);
+        
         return(
             <View>
                 <Image 
@@ -57,7 +57,8 @@ class Post extends Component {
                     source={{uri: this.props.postData.data.photo}}
                     resizeMode='cover'
                 />
-                <TouchableOpacity onPress={()=> this.props.navigation.navigate('Profile',{email : this.props.postData.data.owner})}>
+                
+                <TouchableOpacity onPress={()=> this.props.props2.navigation.navigate('Profile', {email : this.props.postData.data.owner})}>
                     <Text>Subido por {this.props.postData.data.owner}</Text>
                     </TouchableOpacity>
 
