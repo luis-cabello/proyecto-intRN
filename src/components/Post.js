@@ -41,7 +41,7 @@ class Post extends Component {
         db.collection('posts')
             .doc(this.props.postData.id)
             .update({
-                likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+                likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
             })
             .then(() => this.setState({
                 cantidadDeLikes: this.state.cantidadDeLikes - 1,
@@ -107,7 +107,8 @@ class Post extends Component {
                     source={{ uri: this.props.postData.data.photo }}
                     resizeMode='cover'
                 />
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile', { email: this.props.postData.data.owner })}>
+                
+                <TouchableOpacity onPress={()=> this.props.props2.navigation.navigate('Profile', {email : this.props.postData.data.owner})}>
                     <Text>Subido por {this.props.postData.data.owner}</Text>
                 </TouchableOpacity>
 

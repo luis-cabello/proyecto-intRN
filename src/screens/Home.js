@@ -33,15 +33,15 @@ class Home extends Component{
 
     render(){
         console.log(this.state.posts);
+        console.log(this.props.navigation);
         return(
             <ScrollView>
                
                 <Text>Posts</Text>
-
                 <FlatList 
                         data={this.state.posts}
                         keyExtractor={ onePost => onePost.id.toString()}
-                        renderItem={ ({item}) => <Post postData={item} />}
+                        renderItem={ ({item}) => <Post postData={item} props2={this.props} />}
                     />               
             </ScrollView>
 
