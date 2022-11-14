@@ -108,7 +108,7 @@ class Post extends Component {
                     resizeMode='cover'
                 />
                 
-                <TouchableOpacity onPress={()=> this.props.props2.navigation.navigate('Profile', {email : this.props.postData.data.owner})}>
+                <TouchableOpacity onPress={()=> this.props.props2.navigation.navigate('ProfileOthers', {email : this.props.postData.data.owner})}>
                     <Text>Subido por {this.props.postData.data.owner}</Text>
                 </TouchableOpacity>
 

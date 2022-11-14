@@ -3,7 +3,7 @@ import {auth, db} from '../firebase/config';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image} from 'react-native';
 import Post from '../components/Post'
 
-class Profile extends Component {
+class ProfileOthers extends Component {
     constructor(){
         super()
         this.state = {
@@ -152,4 +152,4 @@ const styles= StyleSheet.create ({
 })
 
 
-export default Profile
+export default ProfileOthers
