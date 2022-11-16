@@ -72,9 +72,6 @@ class Profile extends Component {
         <Text> {this.state.users.email}</Text>
         <Text> {this.state.users.userName} </Text>
         <Text> {this.state.users.bio} </Text>
-        <Text>
-        <TouchableOpacity onPress={() => this.logout()}> Sign Out</TouchableOpacity>
-        </Text>
         <Image
         style={styles.foto}
             source={this.state.users.fotoPerfil}
