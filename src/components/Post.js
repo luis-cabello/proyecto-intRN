@@ -11,15 +11,16 @@ class Post extends Component {
             miLike: false,
             comment: '',
             seeComment: false,
-            seeAll: false
+            seeAll: false,
         }
     }
 
     componentDidMount() {
         if (this.props.postData.data.likes.includes(auth.currentUser.email)) {
             this.setState({
-                miLike: true
+                miLike: true,
             })
+            
         }
     }
 
@@ -86,7 +87,7 @@ class Post extends Component {
     }
     seeAll() {
         this.setState({
-            vertodos: true,
+            seeAll: true,
         })
     }
 
@@ -99,35 +100,34 @@ class Post extends Component {
 
 
     render() {
-        console.log(this.props);
         return (
-            <View>
+            <View style={styles.container}>
                 <Image
                     style={styles.photo}
                     source={{ uri: this.props.postData.data.photo }}
                     resizeMode='cover'
                 />
                 
-                <TouchableOpacity onPress={()=> this.props.props2.navigation.navigate('Profile', {email : this.props.postData.data.owner})}>
-                    <Text>Subido por {this.props.postData.data.owner}</Text>
+                <TouchableOpacity onPress={()=> auth.currentUser.email === this.props.postData.data.owner ? this.props.props2.navigation.navigate('Profile', {email : this.props.postData.data.owner}) : this.props.props2.navigation.navigate('OthersProfile', {email : this.props.postData.data.owner}) }>
+                    <Text style={styles.data} >Subido por {this.props.postData.data.owner}</Text>
                 </TouchableOpacity>
 
                 {this.state.miLike ?
                     <TouchableOpacity onPress={() => this.unlike()}>
-                        <Text>Dislike</Text>
+                        <Text style={styles.data} >Dislike</Text>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity onPress={() => this.like()}>
-                        <Text>Like</Text>
+                        <Text style={styles.data}>Like</Text>
                     </TouchableOpacity>
                 }
 
-                <Text>{this.state.cantidadDeLikes} likes </Text>
-                <Text>{this.props.postData.data.textoPosteo}</Text>
+                <Text style={styles.data}> {this.state.cantidadDeLikes} likes </Text>
+                <Text style={styles.data}>{this.props.postData.data.textoPosteo}</Text>
 
 
                 <View>
-                    <TextInput keyboardType='default'
+                    <TextInput style={styles.input} keyboardType='default'
                         placeholder='Escribí tu comentario'
                         onChangeText={(text) => { this.setState({ comment: text }) }}
                         value={this.state.comment}
@@ -152,7 +152,7 @@ class Post extends Component {
                                                     this.props.postData.data.comments.slice(-4)  // me devuelve 4 y tengo boton ver todos
                                             }
                                             keyExtractor={post => post.createdAt.toString()}
-                                            renderItem={({ item }) => <Text> {item.author}: {item.commentText}</Text>}
+                                            renderItem={({ item }) => <Text style={styles.data}> {item.author}: {item.commentText}</Text>}
                                         />
                                         {this.state.seeAll ? //si ver TODOS es true (apreto boton ver TODOS)
                                             //mostrar boton ver menos
@@ -190,8 +190,36 @@ class Post extends Component {
 
 const styles = StyleSheet.create({
     photo: {
-        height: 250 
-    }
+        height: 500,
+        width: 500 
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#1d1e22',
+        alignItems: 'center',
+        textAlign: 'center',
+        width: '100%',   
+    },
+    data : {
+        color: 'white'
+    },
+    input: {
+        width: 300,
+        height: 44,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#47cf73',
+        marginTop: 10,
+        marginBottom: 10,
+        borderRadius: 5,
+        color: "white"
+    },
+    button: {
+        backgroundColor: '#47cf73',
+        padding: 10,
+        margin: 10,
+        borderRadius: 5,
+    },
 })
 
 export default Post;

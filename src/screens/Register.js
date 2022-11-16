@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, TouchableOpacity} from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet} from 'react-native'
 import { auth, db } from '../firebase/config'
 import MyCamera from '../components/MyCamera';
 
@@ -51,29 +51,29 @@ class Register extends Component {
     render() {
         console.log(this.state.disabled);
         return (
-            <View>
+            <View style={styles.container}>
                 <Text>Register</Text>
                 <View >
-                    <TextInput
+                    <TextInput style={styles.input}
                         placeholder="Email"
                         keyboardType="Email-Adress"
-                        onChangeText={text => { this.setState({ email: text, disabled: false}) }} //setemoas el estado y la info que ponga el usuario se guardara alli
+                        onChangeText={text => { this.setState({ email: text}) }} //setemoas el estado y la info que ponga el usuario se guardara alli
                         value={this.state.email} />
 
-                    <TextInput
+                    <TextInput style={styles.input}
                         placeholder="Password"
                         keyboardType="default"
                         onChangeText={text => { this.setState({ password: text }) }} //setemoas el estado y la info que ponga el usuario se guardara alli
                         value={this.state.password}
                         secureTextEntry={true} />
 
-                    <TextInput
+                    <TextInput style={styles.input}
                         placeholder="User name"
                         keyboardType="default"
                         onChangeText={text => { this.setState({ userName: text }) }} //setemoas el estado y la info que ponga el usuario se guardara alli
                         value={this.state.userName} />
 
-                    <TextInput
+                    <TextInput style={styles.input}
                         placeholder="Bio"
                         keyboardType="default"
                         onChangeText={text => { this.setState({ bio: text }) }} //setemoas el estado y la info que ponga el usuario se guardara alli
@@ -85,12 +85,12 @@ class Register extends Component {
                             <MyCamera onImageUpload={url => this.onImageUpload(url)}/> 
                         </View> 
                         :
-                        <TouchableOpacity onPress={()=> this.setState({showCamera:true})}>
+                        <TouchableOpacity style={styles.button} onPress={()=> this.setState({showCamera:true})}>
                             <Text>Subir foto de perfil</Text>
                         </TouchableOpacity>
                     }
-
-                    <TouchableOpacity disabled={this.state.disabled} onPress={() => this.registerUser(this.state.email, this.state.password, this.state.userName, this.state.bio, this.state.fotoPerfil )}>
+                    
+                    <TouchableOpacity style={styles.button} onPress={() => this.registerUser(this.state.email, this.state.password, this.state.userName, this.state.bio, this.state.fotoPerfil )}>
                         <Text>Register</Text>
                     </TouchableOpacity>
 
@@ -98,8 +98,33 @@ class Register extends Component {
             </View>
         )
     }
-    
-
-
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#1d1e22',
+        alignItems: 'center',
+        textAlign: 'center',
+        width: '100%',   
+    },
+    input: {
+        width: 300,
+        height: 44,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#47cf73',
+        marginTop: 10,
+        marginBottom: 10,
+        borderRadius: 5,
+        color: "white"
+    },
+    button: {
+        backgroundColor: '#47cf73',
+        padding: 10,
+        margin: 10,
+        borderRadius: 5,
+    },
+})
+
 export default Register

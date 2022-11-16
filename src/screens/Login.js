@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native'
 import { auth } from '../firebase/config'
 import { Switch } from 'react-native'
 
@@ -34,16 +34,16 @@ class Login extends Component {
 
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <Text> Login </Text>
                 <View>
-                    <TextInput
+                    <TextInput style={styles.input}
                         placeholder='Email'
                         keyboardType='Email-Adress'
                         onChangeText={text => { this.setState({ email: text }) }}
                         value={this.state.email} />
 
-                    <TextInput
+                    <TextInput style={styles.input}
                         placeholder='Password'
                         keyboardType='default'
                         onChangeText={text => { this.setState({ password: text }) }}
@@ -51,10 +51,10 @@ class Login extends Component {
                         secureTextEntry={true} />
 
 
-                        <TouchableOpacity onPress = {() => this.loginUser(this.state.email, this.state.password)}>
+                        <TouchableOpacity style={styles.button} onPress = {() => this.loginUser(this.state.email, this.state.password)}>
                             <Text>Log in</Text>
                         </TouchableOpacity>                     
-                        <Text onPress = {() => this.props.navigation.navigate('Register')}> Go to Register</Text>
+                        <Text  style={styles.button} onPress = {() => this.props.navigation.navigate('Register')}> Go to Register</Text>
 
                     
 
@@ -62,11 +62,33 @@ class Login extends Component {
             </View>
         )
     }
-
-
-
-
-
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#1d1e22',
+        alignItems: 'center',
+        textAlign: 'center',
+        width: '100%',   
+    },
+    input: {
+        width: 300,
+        height: 44,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: '#47cf73',
+        marginTop: 10,
+        marginBottom: 10,
+        borderRadius: 5,
+        color: "white"
+    },
+    button: {
+        backgroundColor: '#47cf73',
+        padding: 10,
+        margin: 10,
+        borderRadius: 5,
+    },
+})
 
 export default Login

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {auth, db} from '../firebase/config';
-import {Text, View, FlatList, ScrollView} from 'react-native'
+import {Text, View, FlatList, ScrollView, StyleSheet} from 'react-native'
 import Post from '../components/Post';
 
 
@@ -32,13 +32,11 @@ class Home extends Component{
     }
 
     render(){
-        console.log(this.state.posts);
-        console.log(this.props.navigation);
         return(
-            <ScrollView>
+            <ScrollView style={styles.container}>
                
                 <Text>Posts</Text>
-                <FlatList 
+                <FlatList style={styles.posts}
                         data={this.state.posts}
                         keyExtractor={ onePost => onePost.id.toString()}
                         renderItem={ ({item}) => <Post postData={item} props2={this.props} />}
@@ -48,5 +46,14 @@ class Home extends Component{
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#1d1e22',
+        textAlign: 'center',
+        padding: 10,
+    }
+})
 
 export default Home
