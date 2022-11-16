@@ -29,9 +29,6 @@ class Register extends Component {
                     createdAt: Date.now()
                 })
 
-                    .then(() => {
-                        email: 'email'
-                    })
                     .then(() => this.props.navigation.navigate('Login')) //una vez que se registra, que me redirija a una pagina
                     
 
