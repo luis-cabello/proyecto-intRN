@@ -3,12 +3,12 @@ import {auth, db} from '../firebase/config';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image} from 'react-native';
 import Post from '../components/Post'
 
-class Profile extends Component {
+class ProfileOthers extends Component {
     constructor(){
         super()
         this.state = {
             users: [],
-            email: auth.currentUser.email,
+            email: '',
             bio: '',
             fotoPerfil: '',
             posts: [],
@@ -57,6 +57,51 @@ class Profile extends Component {
 
     }
 
+    componentDidUpdate(){
+
+        const currentEmail = this.props.route.params == undefined ? auth.currentUser.email : this.props.route.params.email;
+
+        console.log(currentEmail);
+
+        if (this.state.email === currentEmail) return;
+
+        db.collection('users').where('email', '==', currentEmail).onSnapshot(
+            docs => {
+                //if 
+                let users = [];
+                docs.forEach(doc => {
+                    console.log(doc);
+                    users.push({
+                        id : doc.id,
+                        data: doc.data(),
+                        email: doc.data().email,
+                        userName : doc.data().userName,
+                        bio : doc.data().bio,
+                        fotoPerfil : doc.data().fotoPerfil
+                    })
+                    this.setState({
+                        users : users[0],
+                        email: currentEmail
+                    })
+                })
+            });
+
+        db.collection('posts').where('owner', '==', currentEmail).onSnapshot( 
+            docs => {
+                let posts = [];
+                docs.forEach( doc => {
+                    posts.push({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                    this.setState({
+                        posts: posts
+                    })
+                }) 
+            }
+        )
+
+    }
 
     logout(){
         auth.signOut()
@@ -67,7 +112,6 @@ class Profile extends Component {
         
     return(
         <ScrollView>
-        <TouchableOpacity onPress={() => this.logout()}> Sign Out</TouchableOpacity>
         <Text>Usuario</Text>
         <Text> {this.state.users.email}</Text>
         <Text> {this.state.users.userName} </Text>
@@ -108,4 +152,4 @@ const styles= StyleSheet.create ({
 })
 
 
-export default Profile
+export default ProfileOthers

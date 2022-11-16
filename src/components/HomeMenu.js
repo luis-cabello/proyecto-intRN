@@ -23,7 +23,7 @@ function HomeMenu() {
             <Tab.Screen name='Profile' component={Profile} options={{ tabBarIcon: () => <Ionicons name="person" size={24} color="black" /> }} />
         </Tab.Navigator>
     )
-        
+
 }
 
 
