@@ -71,7 +71,13 @@ class Post extends Component {
             .catch(e => console.log(e))
     }
 
-
+    borrarPosteo(){
+        db.collection('post')
+        .doc(this.props.id)
+        .delete()
+        .then(()=> {this.props.navigation.navigate('Profile')})
+        .catch(err=> console.log(err))
+    }
 
     seeComment() {
         this.setState({
@@ -107,6 +113,7 @@ class Post extends Component {
                     source={{ uri: this.props.postData.data.photo }}
                     resizeMode='cover'
                 />
+              
                 
                 <TouchableOpacity onPress={()=> auth.currentUser.email === this.props.postData.data.owner ? this.props.props2.navigation.navigate('Profile', {email : this.props.postData.data.owner}) : this.props.props2.navigation.navigate('OthersProfile', {email : this.props.postData.data.owner}) }>
                     <Text style={styles.data} >Subido por {this.props.postData.data.owner}</Text>
@@ -182,7 +189,7 @@ class Post extends Component {
                         :
                         <Text> No hay comentarios</Text>
                 }
-
+              
             </View>
         )
     }
