@@ -66,19 +66,23 @@ class Profile extends Component {
     render(){
         
     return(
-        <ScrollView>
-        <TouchableOpacity onPress={() => this.logout()}> Sign Out</TouchableOpacity>
-        <Text>Usuario</Text>
-        <Text> {this.state.users.email}</Text>
-        <Text> {this.state.users.userName} </Text>
-        <Text> {this.state.users.bio} </Text>
+        <ScrollView style={styles.container}>
+            <View style={styles.perfil}>
         <Image
         style={styles.foto}
             source={this.state.users.fotoPerfil}
             resizeMode='cover'
             />
-        
-        <Text> Lista de sus {this.state.posts.length} posteos  </Text>
+            <View style={styles.datos}>
+        <TouchableOpacity style={styles.text} onPress={() => this.logout()}> Sign Out</TouchableOpacity>
+        <Text style={styles.text}>Usuario</Text>
+        <Text style={styles.text}> {this.state.users.email}</Text>
+        <Text style={styles.text}> {this.state.users.userName} </Text>
+        <Text style={styles.text}> {this.state.users.bio} </Text>
+        </View>
+        </View>
+
+        <Text style={styles.titulo}> Lista de sus {this.state.posts.length} posteos  </Text>
         <FlatList 
             data={this.state.posts}
             keyExtractor={ onePost => onePost.id.toString()}
@@ -94,13 +98,39 @@ const styles= StyleSheet.create ({
     scroll:{
         flex: 2
     },
+    text:{
+        color: "white"
+    },
+    titulo:{
+        fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+    color: 'white'
+    },
+    container: {
+        flex: 1,
+        backgroundColor: 'grey',
+        padding: 10,
+    },
     foto:{
-        height:500,
-        width:500,
-        borderRadius:6 ,
+        height:200,
+        width:200,
+        borderRadius: 250,
         padding: 5,
         alignItems:'center'    
         },
+        perfil:{
+            flex: 1,
+            flexDirection: 'row',
+            height: 800,
+            alignItems: 'center',
+            padding: 80
+        },
+        datos:{
+            flex: 1,
+            flexDirection: 'column',
+            padding: 20
+        }
 
 })
 

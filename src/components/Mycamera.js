@@ -101,12 +101,10 @@ const styles = StyleSheet.create({
         height: '80vh',
     },
     button:{
-        height: '20vh',
-        borderColor: '#ccc',
-        borderWidth: 1,
-        padding: 5,
-        borderRadius: 4,
-        marginTop: 20
+        backgroundColor: '#47cf73',
+        padding: 10,
+        margin: 10,
+        borderRadius: 5,
     },
     preview:{
         height:'40vh'

@@ -198,11 +198,14 @@ class Post extends Component {
 const styles = StyleSheet.create({
     photo: {
         height: 500,
-        width: 500 
+        borderRadius:6 ,
+        width: 500,
+        margin: 20
+        
     },
     container: {
         flex: 1,
-        backgroundColor: '#1d1e22',
+        backgroundColor: 'grey',
         alignItems: 'center',
         textAlign: 'center',
         width: '100%',   

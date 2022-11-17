@@ -12,6 +12,8 @@ class Search extends Component {
             filteredMail: [],
             search: false,
             postSearchText: '',
+            userError: ''
+
         }
         console.log(this.props);
     }
@@ -95,7 +97,7 @@ class Search extends Component {
                 </TouchableOpacity >
 
 
-                {this.state.userErr ?
+                {this.state.userError ?
                     <Text>El usuario no existe</Text>
                     :
                     <FlatList 
@@ -114,7 +116,7 @@ class Search extends Component {
                     /> 
                 }  
             
-                {this.state.userErr ?
+                {this.state.userError ?
                     <Text>El mail no existe</Text>
                     :
                     <FlatList
@@ -139,7 +141,7 @@ class Search extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
+        backgroundColor: 'grey',
         alignItems: 'center',
         textAlign: 'center',
         width: '100%',
@@ -149,17 +151,18 @@ const styles = StyleSheet.create({
         height: 44,
         padding: 10,
         borderWidth: 1,
-        borderColor: '#00ADB5',
+        borderColor: '#47cf73',
         marginTop: 10,
         marginBottom: 10,
         borderRadius: 5,
+        color: "white"
     },
     list: {
         width: '100%',
         height: '100%',
     },
     button: {
-        backgroundColor: '#00ADB5',
+        backgroundColor: '#47cf73',
         padding: 10,
         margin: 10,
         borderRadius: 5,

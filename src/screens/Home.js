@@ -50,7 +50,7 @@ class Home extends Component{
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#1d1e22',
+        backgroundColor: 'grey',
         textAlign: 'center',
         padding: 10,
     }
