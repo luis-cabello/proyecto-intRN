@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {auth, db} from '../firebase/config';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image, Ionicons} from 'react-native';
 import Post from '../components/Post'
+import Editar from './Editar';
 
 class Profile extends Component {
     constructor(){
@@ -12,8 +13,7 @@ class Profile extends Component {
             bio: '',
             fotoPerfil: '',
             posts: [],
-
-            
+            miPerfil:{}
         }
 
     }
@@ -79,9 +79,12 @@ class Profile extends Component {
         <Text style={styles.text}> {this.state.users.email}</Text>
         <Text style={styles.text}> {this.state.users.userName} </Text>
         <Text style={styles.text}> {this.state.users.bio} </Text>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate("Editar", {id: this.state.miPerfil.id })}>
+         <Text >EDITAR PERFIL</Text>
+         </TouchableOpacity>
         </View>
         </View>
-
+      
         <Text style={styles.titulo}> Lista de sus {this.state.posts.length} posteos  </Text>
         <FlatList 
             data={this.state.posts}
